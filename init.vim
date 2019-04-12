@@ -18,14 +18,24 @@ Plug 'kshenoy/vim-signature'
 Plug 'ervandew/supertab'
 Plug 'yggdroot/indentline'
 Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-repeat'
+
+Plug 'jeetsukumaran/vim-buffergator'
+"Plug 'tpope/vim-obsession'
+"Plug 'gikmx/ctrlp-obsession'
+"Plug 'alvan/vim-closetag'
+
+"Plug 'cohama/lexima.vim'
+"Plug 'tmsvg/pear-tree'
+"Plug 'tpope/vim-obsession'
 
 
-"Plug 'groenewege/vim-less'
+Plug 'groenewege/vim-less'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'pangloss/vim-javascript'
+Plug 'skammer/vim-css-color'
+"Plug 'pangloss/vim-javascript'
 "Plug 'mxw/vim-jsx'
-"
-"Plug 'w0rp/ale'
+
 
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-syntax'
@@ -34,10 +44,10 @@ Plug 'Shougo/neco-syntax'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/denite.nvim'
 
-
-"Plug 'leafgarland/typescript-vim'
+Plug 'othree/yajs.vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'maxmellon/vim-jsx-pretty'
+
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 "Plug 'peitalin/vim-jsx-typescript'
 
@@ -48,9 +58,8 @@ Plug 'prettier/vim-prettier', {
 
 
 
-Plug 'mattn/emmet-vim'
-
-
+"Plug 'mattn/emmet-vim'
+"Plug 'w0rp/ale'
 "Plug 'OmniSharp/omnisharp-vim'
 
 call plug#end()
@@ -62,22 +71,18 @@ call deoplete#enable()
 call deoplete#custom#option({
 \ 'auto_complete': v:true,
 \ 'auto_complete_delay': 0,
-\ 'max_list': 256,
-\ 'num_processes': 2
+\ 'max_list': 128,
+\ 'num_processes': 4
 \ })
 
 let g:deoplete#enable_at_startup = 1
-"let g:deoplete#enable_ignore_case = 1
-"let g:deoplete#enable_smart_case = 1
-"let g:deoplete#enable_camel_case = 1
-"let g:deoplete#enable_refresh_always = 0
-"let g:deoplete#max_abbr_width = 0
-"let g:deoplete#max_menu_width = 0
+let g:deoplete#enable_refresh_always = 0
+let g:deoplete#max_abbr_width = 0
+let g:deoplete#max_menu_width = 0
 "let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
 
 
 let g:prettier#exec_cmd_async = 1
-let g:prettier#exec_cmd_path = "prettier"
 let g:prettier#quickfix_enabled = 0
 let g:prettier#autoformat = 0
 "autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
@@ -114,7 +119,7 @@ set autoindent
 set smartindent
 set shiftround
 
-set foldcolumn=0
+set foldcolumn=3
 
 "Search Options
 set hlsearch
@@ -143,13 +148,13 @@ set nolinebreak
 set scrolloff=7
 set sidescrolloff=5
 set nowrap
-"set ffs=unix,dos,mac
-set ffs=dos,unix
+set ffs=unix,dos,mac
+"set ffs=dos,unix
 set textwidth=80
 
 "User Interface Options
 set laststatus=2
-set showtabline=0
+set showtabline=2
 set conceallevel=2
 
 
@@ -262,7 +267,7 @@ colorscheme gruvbox
 
 ""================
 let g:airline_theme='gruvbox'
-"let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
 
