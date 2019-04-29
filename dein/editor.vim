@@ -1,8 +1,7 @@
 
-
-"set termguicolors
-autocmd FileType * setlocal formatoptions-=cro
-set formatoptions-=cro
+set hidden
+set termguicolors
+let mapleader = ","
 
 "Indention Options
 syntax enable
@@ -28,6 +27,11 @@ set magic
 "Performance Options
 set complete-=i
 set completeopt-=preview
+"set completeopt=menu,menuone,preview,noselect,noinsert
+"set completeopt=menu,menuone,preview,noselect,noinsert
+"set completeopt-=longest,menuone,preview
+"set previewheight=5
+
 set lazyredraw
 set tm=666
 set ttimeoutlen=33
@@ -93,5 +97,8 @@ set nospell
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 "set wildignore+=*\\tmp\\*,*\\node_modules\\*,*\\.git\\*,*\\.vscode\\*,*.swp,*.zip,*.exe  " Windows
 
-autocmd FileType * setlocal formatoptions-=ro
 
+
+
+set formatoptions-=cro
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
