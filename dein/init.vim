@@ -44,7 +44,7 @@ if dein#load_state('~/.cache/dein')
 	call dein#add('kshenoy/vim-signature')
 	call dein#add('ervandew/supertab')
 	call dein#add('yggdroot/indentline')
-	call dein#add('cohama/lexima.vim')
+	call dein#add('jiangmiao/auto-pairs')
 	call dein#add('tpope/vim-repeat')
 	call dein#add('alvan/vim-closetag')
 	call dein#add('ctrlpvim/ctrlp.vim')
@@ -57,47 +57,41 @@ if dein#load_state('~/.cache/dein')
 	call dein#add('Shougo/neosnippet.vim')
 	call dein#add('Shougo/neosnippet-snippets')
 	call dein#add('Shougo/deoplete.nvim')
+	call dein#add('fszymanski/deoplete-emoji')
 	call dein#add('Shougo/denite.nvim')
+	call dein#add('deoplete-plugins/deoplete-jedi')
+	call dein#add('shougo/deoplete-clangx')
+
+
+	call dein#add('rhysd/vim-clang-format')
+	call dein#add('justmao945/vim-clang')
+
+
+	call dein#add('autozimu/LanguageClient-neovim', {
+    \ 'rev': 'next',
+    \ 'build': 'bash install.sh',
+    \ })
+
+
+	call dein#add('prabirshrestha/async.vim')
+	call dein#add('prabirshrestha/vim-lsp')
+	call dein#add('lighttiger2505/deoplete-vim-lsp')
+	let g:lsp_log_verbose = 1
+	let g:lsp_log_file = expand('./vim-lsp.log')
+
 
 	call dein#add('w0rp/ale')
-	"call dein#add('SirVer/ultisnips')
-	call dein#add('neoclide/coc-neco')
-	call dein#add('neoclide/coc.nvim', {'merge':0, 'build': './install.sh nightly'})
-	"call dein#add('neoclide/coc-denite')
-
-
 	call dein#add('OmniSharp/omnisharp-vim')
-	"call dein#add('adamclerk/vim-razor')
 
 
-	"call dein#add('othree/yajs.vim')
-	"call dein#add('maxmellon/vim-jsx-pretty')
-	"call dein#add('leafgarland/typescript-vim')
-	call dein#add('HerringtonDarkholme/yats.vim')
-	"call dein#add('peitalin/vim-jsx-typescript')
-	"call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
-	"call dein#add('mhartington/nvim-typescript')
 
-	"call dein#local('~/GitHub', {},['nvim-typescript'])
-  	"let $NVIM_NODE_LOG_FILE='nvim-node.log'
-  	"let $NVIM_NODE_LOG_LEVEL='warn'
-
-"====== NOT useful
-"  - call dein#add('dimixar/deoplete-omnisharp')
-"  - call dein#add('astralhpi/deoplete-omnisharp')
-"  - call dein#add('mixedCase/deoplete-omnisharp.git')
-"  - call dein#add('cyansprite/deoplete-omnisharp' , {'build': './install.sh'})
-
-"= maybe  will need
-"Plug 'groenewege/vim-less'
-"Plug 'hail2u/vim-css3-syntax'
-"Plug 'skammer/vim-css-color'
 
 
 "=== END DEIN
 	call dein#end()
 	call dein#save_state()
 endif
+
 "call dein#install()
 
 

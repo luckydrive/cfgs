@@ -1,114 +1,61 @@
 
-"todo coc configuration with deoplete
-
-
 "=== deoplete
 call deoplete#custom#option({
 \ 'auto_complete_delay': 0,
 \ 'max_list': 128,
 \ 'num_processes': 4
 \ })
-
-"let g:deoplete#sources = {'_': [ 'ultisnips']}
-"call deoplete#custom#option('sources', {
-"\ 'cs': ['omnisharp'],
-"\ })
-"let g:deoplete#sources = {'_': [ 'ale'], 'cs':['omnisharp']}
-let g:deoplete#sources ={'cs':['omnisharp']}
+let g:deoplete#sources ={'cs':['omnisharp'], '_':[ 'ale']}
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_refresh_always = 1
 let g:nvim_typescript#server_options = []
 
 
-
-"=== nvim-typescript
-"let g:nvim_typescript#javascript_support = 1
-"let g:nvim_typescript#signature_complete = 1
-"let g:nvim_typescript#type_info_on_hold = 0
-"let g:nvim_typescript#max_completion_detail = 16
-"let g:nvim_typescript#diagnostics_enable = 1
-""autocmd BufWrite *.ts,*.tsx,*.js,*.jsx TSGetDiagnostics
-"nnoremap <leader>tt :bd<cr>
-"nnoremap <leader>tf :TSGetCodeFix<cr>
-"nnoremap <leader>te :TSGetErrorFull<cr>
-"nnoremap <leader>td :TSGetDiagnostics<cr>
-"nnoremap <leader>ti :TSOrganizeImports<cr>
-"nnoremap <leader>tr :TSDef<cr>
-"nnoremap <leader>p :TSDefPreview<cr>
-
-
+"=== for LSP server (deoplete-vim-lsp)
+if (executable('pyls'))
+    let s:pyls_path = fnamemodify(g:python_host_prog, ':h') . '/'. 'pyls'
+    augroup LspPython
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'pyls',
+      \ 'cmd': {server_info->['pyls']},
+      \ 'whitelist': ['python']
+      \ })
+    augroup END
+endif
 
 "=== ALE (using for  fix generally, lint only *.cs)
 let g:ale_completion_delay = 0
 let g:ale_fix_on_save = 1
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 0
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
 let g:ale_linters_explicit = 1
 let g:ale_sign_column_always = 0
-let g:ale_sign_error = 'E'
-let g:ale_sign_warning = 'W'
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 0
-let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_python_flake8_executable = 'flake8'
+
+
 "== lint
-"let g:ale_javascript_flow_use_home_config = 1
-"let g:ale_linters = {
-"\   'javascript': ['tsserver'],
-"\   'javascript.jsx': ['tsserver'],
-"\   'typescript': ['tsserver'],
-"\   'typescript.jsx': ['tsserver'],
-"\   'json': ['eslint'],
-"\   'less': ['lessc'],
-"\   'css': ['lessc'],
-"\}
 let g:ale_linters = {
-\   'cs': ['OmniSharp'],
-\}
+\ 'cs': ['OmniSharp'],
+\ 'python':['flake8']
+\ }
+
 "== fix
 let g:ale_fixers= {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier'],
-\   'javascript.jsx': ['prettier'],
-\   'typescript': ['prettier'],
-\   'typescript.jsx': ['prettier'],
-\   'json': ['prettier'],
-\   'html': ['prettier'],
-\   'css': ['prettier'],
-\   'less': ['prettier'],
-\}
-
+\ '*': ['remove_trailing_lines', 'trim_whitespace'],
+\ 'python':['yapf']
+\ }
 
 
 "=== echo-doc
 let g:echodoc_enable_at_startup = 1
 let g:echodoc_type = 'echo'
-
-
-
-"=== utilsnips
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"let g:UltiSnipsEditSplit="vertical"
-
-
-
-
-"=== COC
-"inoremap <silent><expr> <c-space> coc#refresh()
-"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-nnoremap <leader>coc :CocInstall coc-tsserver coc-neosnippet coc-html coc-emmet coc-svg<cr>
-
-"= coc-tsserver
-autocmd BufWritePre *.ts,*.tsx,*.js,*.jsx CocCommand tsserver.organizeImports
-nnoremap <leader>ti :CocCommand tsserver.organizeImports<cr>
-nnoremap <leader>tt :bd<cr>
-nnoremap <leader>tf :CocCommand tsserver.executeAutofix<cr>
-
-
-
 
 
 
@@ -123,7 +70,6 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|md)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
-" for custom search
 let g:ctrlp_max_depth = 10
 let g:ctrlp_user_command = 'ag -l -g ""'
 "let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d' " Windows
@@ -132,8 +78,6 @@ let g:ctrlp_user_command = 'ag -l -g ""'
 "=== SuperTab
 let g:SuperTabClosePreviewOnPopupClose = 0
 let g:SuperTabCrMapping = 0
-
-
 
 
 
@@ -210,10 +154,6 @@ nnoremap <Leader>sp :OmniSharpStopServer<CR>
 "let g:OmniSharp_want_snippet=1
 
 
-
-
-
-
 "=== colorscheme
 set background=dark
 let g:gruvbox_contrast_dark = 'hard'
@@ -221,7 +161,6 @@ let g:gruvbox_contrast_light = 'soft'
 let g:gruvbox_invert_tabline=0
 let g:gruvbox_italic= 1
 colorscheme gruvbox
-
 
 
 "=== airline
@@ -241,11 +180,7 @@ let g:indentLine_char = '│'
 
 
 "=== closetag
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.jsx,*.ts,*.tsx,*.cshtml,*.xml'
+let g:closetag_filenames = '*.xml'
 let g:closetag_emptyTags_caseSensitive = 1
-let g:closetag_regions = {
-    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-    \ 'javascript.jsx': 'jsxRegion',
-    \ }
 let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
