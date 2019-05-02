@@ -5,24 +5,25 @@ call deoplete#custom#option({
 \ 'max_list': 128,
 \ 'num_processes': 4
 \ })
-let g:deoplete#sources ={'cs':['omnisharp'], '_':[ 'ale']}
+let g:deoplete#sources ={'cs':['omnisharp'] }
+call deoplete#custom#var('clangx', 'clang_binary', '/usr/bin/clang')
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_refresh_always = 1
 let g:nvim_typescript#server_options = []
 
 
 "=== for LSP server (deoplete-vim-lsp)
-if (executable('pyls'))
-    let s:pyls_path = fnamemodify(g:python_host_prog, ':h') . '/'. 'pyls'
-    augroup LspPython
-        autocmd!
-        autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'pyls',
-      \ 'cmd': {server_info->['pyls']},
-      \ 'whitelist': ['python']
-      \ })
-    augroup END
-endif
+"if (executable('pyls'))
+    "let s:pyls_path = fnamemodify(g:python_host_prog, ':h') . '/'. 'pyls'
+    "augroup LspPython
+        "autocmd!
+        "autocmd User lsp_setup call lsp#register_server({
+      "\ 'name': 'pyls',
+      "\ 'cmd': {server_info->['pyls']},
+      "\ 'whitelist': ['python']
+      "\ })
+    "augroup END
+"endif
 
 "=== ALE (using for  fix generally, lint only *.cs)
 let g:ale_completion_delay = 0
@@ -37,19 +38,18 @@ let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 0
-let g:ale_python_flake8_executable = 'flake8'
 
 
 "== lint
 let g:ale_linters = {
 \ 'cs': ['OmniSharp'],
-\ 'python':['flake8']
+\ 'cpp':['clang'],
 \ }
 
 "== fix
 let g:ale_fixers= {
 \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-\ 'python':['yapf']
+\ 'cpp':['clang-format']
 \ }
 
 

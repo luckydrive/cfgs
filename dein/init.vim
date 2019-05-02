@@ -59,29 +59,30 @@ if dein#load_state('~/.cache/dein')
 	call dein#add('Shougo/deoplete.nvim')
 	call dein#add('fszymanski/deoplete-emoji')
 	call dein#add('Shougo/denite.nvim')
-	call dein#add('deoplete-plugins/deoplete-jedi')
+
+	"call dein#add('deoplete-plugins/deoplete-jedi')
 	call dein#add('shougo/deoplete-clangx')
 
 
-	call dein#add('rhysd/vim-clang-format')
-	call dein#add('justmao945/vim-clang')
+"	call dein#add('rhysd/vim-clang-format')
+"	call dein#add('justmao945/vim-clang')
 
 
-	call dein#add('autozimu/LanguageClient-neovim', {
-    \ 'rev': 'next',
-    \ 'build': 'bash install.sh',
-    \ })
-
-
-	call dein#add('prabirshrestha/async.vim')
-	call dein#add('prabirshrestha/vim-lsp')
-	call dein#add('lighttiger2505/deoplete-vim-lsp')
-	let g:lsp_log_verbose = 1
-	let g:lsp_log_file = expand('./vim-lsp.log')
-
-
+"	call dein#add('autozimu/LanguageClient-neovim', {
+"    \ 'rev': 'next',
+"    \ 'build': 'bash install.sh',
+"    \ })
+"
+"
+	"call dein#add('prabirshrestha/async.vim')
+	"call dein#add('prabirshrestha/vim-lsp')
+	"call dein#add('lighttiger2505/deoplete-vim-lsp')
+	"let g:lsp_log_verbose = 1
+	"let g:lsp_log_file = expand('./vim-lsp.log')
+"
+"
 	call dein#add('w0rp/ale')
-	call dein#add('OmniSharp/omnisharp-vim')
+	"call dein#add('OmniSharp/omnisharp-vim')
 
 
 
@@ -91,7 +92,7 @@ if dein#load_state('~/.cache/dein')
 	call dein#end()
 	call dein#save_state()
 endif
-
+"
 "call dein#install()
 
 
