@@ -9,8 +9,8 @@ filetype indent on
 filetype plugin on
 set expandtab
 set smarttab
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=3
+set tabstop=3
 set noautoindent
 set smartindent
 set shiftround

@@ -19,11 +19,6 @@ endif
 
 
 
-"=== preload cfg
-let g:ale_completion_enabled = 0
-let g:ale_set_balloons = 0
-let g:ale_completion_delay = 0
-let g:ale_completion_max_suggestions = 128
 
 "=== select and load plugins
 "=== DEIN START
@@ -54,26 +49,33 @@ if dein#load_state('~/.cache/dein')
 	call dein#add('Shougo/neco-vim')
 	call dein#add('Shougo/echodoc.vim')
 	call dein#add('Shougo/neco-syntax')
+	call dein#add('fszymanski/deoplete-emoji')
 	call dein#add('Shougo/neosnippet.vim')
 	call dein#add('Shougo/neosnippet-snippets')
+
+	call dein#add('shougo/deoplete-clangx')
+	call dein#add('vim-jp/vim-cpp')
+
+	call dein#add('HerringtonDarkholme/yats.vim')
+   call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+	call dein#add('pangloss/vim-javascript')
+	call dein#add('othree/yajs.vim')
+	call dein#add('maxmellon/vim-jsx-pretty')
+	call dein#add('mxw/vim-jsx')
+	call dein#add('mattn/emmet-vim')
+	call dein#add('hail2u/vim-css3-syntax')
+
+
 	call dein#add('Shougo/deoplete.nvim')
-	call dein#add('fszymanski/deoplete-emoji')
 	call dein#add('Shougo/denite.nvim')
 
-	"call dein#add('deoplete-plugins/deoplete-jedi')
-	call dein#add('shougo/deoplete-clangx')
-
-
-"	call dein#add('rhysd/vim-clang-format')
-"	call dein#add('justmao945/vim-clang')
 
 
 "	call dein#add('autozimu/LanguageClient-neovim', {
 "    \ 'rev': 'next',
 "    \ 'build': 'bash install.sh',
 "    \ })
-"
-"
+
 	"call dein#add('prabirshrestha/async.vim')
 	"call dein#add('prabirshrestha/vim-lsp')
 	"call dein#add('lighttiger2505/deoplete-vim-lsp')
@@ -82,11 +84,7 @@ if dein#load_state('~/.cache/dein')
 "
 "
 	call dein#add('w0rp/ale')
-	"call dein#add('OmniSharp/omnisharp-vim')
-
-
-
-
+"	call dein#add('OmniSharp/omnisharp-vim')
 
 "=== END DEIN
 	call dein#end()

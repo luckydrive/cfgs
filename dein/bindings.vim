@@ -15,8 +15,8 @@ nmap <leader>lp :edit ~/.config/nvim/plugins.vim<cr>
 "nmap <leader>pi :call dein#install()<cr>
 "nmap <leader>pc :call dein#clear_state()<cr>
 "nmap <leader>pu :call dein#check_update()<cr>
-"nmap <leader>pi :PlugInstall<cr>
-"nmap <leader>pc :PlugClean<cr>
+nmap <leader>i :call dein#install()<cr>
+nmap <leader>u :DeinUpdate<cr>
 
 nnoremap <leader>zz :e ++ff=dos<cr>
 nnoremap n nzzzv
@@ -35,7 +35,7 @@ nnoremap <leader>a :ALEFix<cr>
 nnoremap <leader>bc :bd<cr>
 nnoremap <leader>cz :bd<cr>
 "nnoremap <leader>cc :bd<cr>
-nnoremap <leader>ba :bufdo bd<cr>
+nnoremap <leader>aa :bufdo bd<cr>
 "nnoremap <leader>w :CtrlPMRU<cr>
 nnoremap <leader>e :CtrlP<cr>
 "nnoremap <leader>w :CtrlPBuffer<cr>
@@ -75,6 +75,3 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 autocmd InsertEnter * set cursorline
 autocmd InsertLeave * set nocursorline
-
-
-
