@@ -1,0 +1,2 @@
+
+./install.sh RobotoMono, DroidSansMono, Mononoki, Inconsolata, FantasqueSansMono, FiraCode, DejaVuSansMono, Hasklig, Hack, CodeNewRoman

@@ -1,6 +1,7 @@
 " configs for Neovim; required at least pyhthon3, pip3 -> neovim, pynvim; nodejs -> neovim, typescript
-" run :Ugraderemoteplugins, :checkhealth let g:python3_host_prog = '/usr/bin/python3'
-let g:python_host_prog = '/usr/bin/python'
+" run :Ugraderemoteplugins, :checkhealth 
+let g:python3_host_prog = '/usr/local/bin/python3.6'
+"let g:python_host_prog = '/usr/local/bin/python2.7'
 set nocompatible
 
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
@@ -51,19 +52,40 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-neoinclude' | Plug 'Shougo/neoinclude.vim'
+Plug 'ncm2/ncm2-neoinclude' | Plug 'shougo/neoinclude.vim'
 Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-github'
-Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
+Plug 'ncm2/ncm2-syntax' | Plug 'shougo/neco-syntax'
+Plug 'ncm2/ncm2-vim' | Plug 'shougo/neco-vim'
 Plug 'ncm2/ncm2-cssomni'
 Plug 'ncm2/ncm2-html-subscope'
 Plug 'ncm2/ncm2-markdown-subscope'
 
-Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'shougo/denite.nvim'
-Plug 'shougo/deol.nvim'
-Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+Plug 'othree/yajs.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+let g:used_javascript_libs = 'underscore,react,flux,d3'
+Plug 'jelera/vim-javascript-syntax'
+
+Plug 'herringtondarkholme/yats.vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'ncm2/nvim-typescript', {'do': './install.sh'}
+
+
+Plug 'moll/vim-node'
+
+Plug 'hail2u/vim-css3-syntax'
+augroup VimCSS3Syntax
+  autocmd!
+
+  autocmd FileType css setlocal iskeyword+=-
+augroup END
+Plug 'groenewege/vim-less'
+
+"Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+""Plug 'shougo/denite.nvim'
+"Plug 'shougo/deol.nvim'
+"Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'shougo/neco-syntax'
 Plug 'shougo/neoinclude.vim'
 Plug 'shougo/neco-vim'
@@ -71,15 +93,15 @@ Plug 'shougo/echodoc.vim'
 Plug 'shougo/vimproc.vim', {'build' : 'make'}
 Plug 'fszymanski/deoplete-emoji'
 
-Plug 'zchee/deoplete-jedi'
+"Plug 'zchee/deoplete-jedi'
 
-Plug 'dense-analysis/ale'
-Plug 'OmniSharp/omnisharp-vim'
+"Plug 'dense-analysis/ale'
+"Plug 'OmniSharp/omnisharp-vim'
 
-Plug 'autozimu/LanguageClient-neovim', {
-\ 'branch': 'next',
-\ 'do': 'bash install.sh',
-\ }
+"Plug 'autozimu/LanguageClient-neovim', {
+"\ 'branch':'next',
+"\ 'do': 'bash install.sh',
+"\ }
 
 call plug#end()
 
@@ -326,21 +348,17 @@ autocmd InsertEnter * set cursorline
 autocmd InsertLeave * set nocursorline
 
 
+
 "setplugins
 
 "let g:LanguageClient_serverCommands = {
-    "\ }
+"\ 'javascript':['tsserver'],
+"\ 'javascript.jsx':['tsserver'],
+"\ 'typescript':['tsserver'],
+"\ 'typescript.tsx':['tsserver'],
+"\ }
+"noremap <F5> :call LanguageClient_contextMenu()<CR>
 
-"nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-
-
-
-
-
-
-"let g:LanguageClient_serverCommands = {
-    "\ 'cs': ['tcp://127.0.0.1:20002'],
-    "\ }
 
 
 
@@ -351,126 +369,126 @@ inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 au User Ncm2Plugin call ncm2#register_source({
-            \ 'name' : 'css',
-            \ 'priority': 9,
-            \ 'subscope_enable': 1,
-            \ 'scope': ['css','scss'],
-            \ 'mark': 'css',
-            \ 'word_pattern': '[\w\-]+',
-            \ 'complete_pattern': ':\s*',
-            \ 'on_complete': ['ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
-            \ })
+			\ 'name' : 'css',
+			\ 'priority': 9,
+			\ 'subscope_enable': 1,
+			\ 'scope': ['css','scss'],
+			\ 'mark': 'css',
+			\ 'word_pattern': '[\w\-]+',
+			\ 'complete_pattern': ':\s*',
+			\ 'on_complete': ['ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
+			\ })
 
 
 
 
 "=== SuperTab
-let g:SuperTabClosePreviewOnPopupClose = 1
-let g:SuperTabCrMapping = 1
-  autocmd FileType *
-    \ if &omnifunc != '' |
-    \   call SuperTabChain(&omnifunc, "<c-p>") |
-    \ endif
+"let g:SuperTabClosePreviewOnPopupClose = 1
+"let g:SuperTabCrMapping = 1
+  "autocmd FileType *
+    "\ if &omnifunc != '' |
+    "\   call SuperTabChain(&omnifunc, "<c-p>") |
+    "\ endif
 
 
 
 
 "deop
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#var('tabnine', {
-\ 'line_limit': 500,
-\ 'max_num_results': 20,
-\ })
-let g:deoplete#sources ={'_':[]}
+"let g:deoplete#enable_at_startup = 1
+"call deoplete#custom#var('tabnine', {
+"\ 'line_limit': 500,
+"\ 'max_num_results': 20,
+"\ })
+"let g:deoplete#sources ={'_':[]}
 
 
 
 
 
 "=== Omnisharp
-let g:OmniSharp_start_server = 1
-let g:OmniSharp_port = 20002
-let g:OmniSharp_server_stdio = 1
+"let g:OmniSharp_start_server = 1
+"let g:OmniSharp_port = 20002
+"let g:OmniSharp_server_stdio = 1
 
-let g:OmniSharp_server_use_mono = 1
-let g:OmniSharp_selector_ui = 'fzf'
-let g:OmniSharp_highlight_types = 2
-let g:omnicomplete_fetch_full_documentation = 0
-let g:OmniSharp_typeLookupInPreview = 0
-let g:OmniSharp_timeout = 0
-let g:OmniSharp_highlight_types = 1
-let g:OmniSharp_open_quickfix = 0
-let g:OmniSharp_loglevel = 'critical'
+"let g:OmniSharp_server_use_mono = 1
+"let g:OmniSharp_selector_ui = 'fzf'
+"let g:OmniSharp_highlight_types = 2
+"let g:omnicomplete_fetch_full_documentation = 0
+"let g:OmniSharp_typeLookupInPreview = 0
+"let g:OmniSharp_timeout = 0
+"let g:OmniSharp_highlight_types = 1
+"let g:OmniSharp_open_quickfix = 0
+"let g:OmniSharp_loglevel = 'critical'
 
-""=================
-autocmd BufNewFile,BufReadPost *.config set filetype=xml
-autocmd BufNewFile,BufReadPost *.csproj set filetype=xml
-autocmd BufNewFile,BufReadPost *.sln set filetype=xml
-augroup omnisharp_commands
-   autocmd!
+"""=================
+"autocmd BufNewFile,BufReadPost *.config set filetype=xml
+"autocmd BufNewFile,BufReadPost *.csproj set filetype=xml
+"autocmd BufNewFile,BufReadPost *.sln set filetype=xml
+"augroup omnisharp_commands
+   "autocmd!
 
-   " When Syntastic is available but not ALE, automatic syntax check on events
-   " (TextChanged requires Vim 7.4)
-	" autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+   "" When Syntastic is available but not ALE, automatic syntax check on events
+   "" (TextChanged requires Vim 7.4)
+	"" autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
 
-   " Show type information automatically when the cursor stops moving
-   autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+   "" Show type information automatically when the cursor stops moving
+   "autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 
-	" Update the highlighting whenever leaving insert mode
-	autocmd InsertLeave *.cs call OmniSharp#HighlightBuffer()
-	"autocmd VimEnter *.cs call OmniSharp#HighlightBuffer()
+	"" Update the highlighting whenever leaving insert mode
+	"autocmd InsertLeave *.cs call OmniSharp#HighlightBuffer()
+	""autocmd VimEnter *.cs call OmniSharp#HighlightBuffer()
 
-	" Alternatively, use a mapping to refresh highlighting for the current buffer
-	autocmd FileType cs nnoremap <buffer> <Leader>th :OmniSharpHighlightTypes<CR>
+	"" Alternatively, use a mapping to refresh highlighting for the current buffer
+	"autocmd FileType cs nnoremap <buffer> <Leader>th :OmniSharpHighlightTypes<CR>
 
-	" The following commands are contextual, based on the cursor position.
-	autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
-	autocmd FileType cs nnoremap <buffer> <Leader>ti :OmniSharpFindImplementations<CR>
-	autocmd FileType cs nnoremap <buffer> <Leader>ts :OmniSharpFindSymbol<CR>
-	autocmd FileType cs nnoremap <buffer> <Leader>tu :OmniSharpFindUsages<CR>
+	"" The following commands are contextual, based on the cursor position.
+	"autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
+	"autocmd FileType cs nnoremap <buffer> <Leader>ti :OmniSharpFindImplementations<CR>
+	"autocmd FileType cs nnoremap <buffer> <Leader>ts :OmniSharpFindSymbol<CR>
+	"autocmd FileType cs nnoremap <buffer> <Leader>tu :OmniSharpFindUsages<CR>
 
-	" Finds members in the current buffer
-	autocmd FileType cs nnoremap <buffer> <Leader>tm :OmniSharpFindMembers<CR>
+	"" Finds members in the current buffer
+	"autocmd FileType cs nnoremap <buffer> <Leader>tm :OmniSharpFindMembers<CR>
 
-	autocmd FileType cs nnoremap <buffer> <Leader>tx :OmniSharpFixUsings<CR>
-	autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
-	autocmd FileType cs nnoremap <buffer> <Leader>tc :OmniSharpDocumentation<CR>
-	autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
-	autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
+	"autocmd FileType cs nnoremap <buffer> <Leader>tx :OmniSharpFixUsings<CR>
+	"autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
+	"autocmd FileType cs nnoremap <buffer> <Leader>tc :OmniSharpDocumentation<CR>
+	"autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
+	"autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
 
-	" Navigate up and down by method/property/field
-	autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
-	autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
-augroup END
+	"" Navigate up and down by method/property/field
+	"autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
+	"autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
+"augroup END
 
-" Contextual code actions (uses fzf, CtrlP or unite.vim when available)
-nnoremap <Leader>tw :OmniSharpGetCodeActions<CR>
-" Run code actions with text selected in visual mode to extract method
-xnoremap <Leader>tw :call OmniSharp#GetCodeActions('visual')<CR>
+"" Contextual code actions (uses fzf, CtrlP or unite.vim when available)
+"nnoremap <Leader>tw :OmniSharpGetCodeActions<CR>
+"" Run code actions with text selected in visual mode to extract method
+"xnoremap <Leader>tw :call OmniSharp#GetCodeActions('visual')<CR>
 
-" Rename with dialog
-nnoremap <Leader>tn :OmniSharpRename<CR>
-nnoremap <F2> :OmniSharpRename<CR>
-" Rename without dialog - with cursor on the symbol to rename: `:Rename newname`
-command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
+"" Rename with dialog
+"nnoremap <Leader>tn :OmniSharpRename<CR>
+"nnoremap <F2> :OmniSharpRename<CR>
+"" Rename without dialog - with cursor on the symbol to rename: `:Rename newname`
+"command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
 
-nnoremap <Leader>tf :OmniSharpCodeFormat<CR>
-
-
-noremap <Leader>tb :OmniSharpStartServer<CR>
-noremap <Leader>to :OmniSharpStopAllServers<CR>
+"nnoremap <Leader>tf :OmniSharpCodeFormat<CR>
 
 
+"noremap <Leader>tb :OmniSharpStartServer<CR>
+"noremap <Leader>to :OmniSharpStopAllServers<CR>
 
 
-"ale
-let g:ale_linters_explicit = 1
-let g:ale_linters = { 'cs': ['OmniSharp'] }
-let g:ale_sign_error = 'e'
-let g:ale_sign_warning = 'w'
-let g:airline#extensions#ale#enabled = 1
-let g:ale_lint_on_enter = 1
-let g:ale_completion_enabled = 0
+
+
+""ale
+"let g:ale_linters_explicit = 1
+"let g:ale_linters = { 'cs': ['OmniSharp'] }
+"let g:ale_sign_error = 'e'
+"let g:ale_sign_warning = 'w'
+"let g:airline#extensions#ale#enabled = 1
+"let g:ale_lint_on_enter = 1
+"let g:ale_completion_enabled = 0
 
 
 
